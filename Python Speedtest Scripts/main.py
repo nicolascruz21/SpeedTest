@@ -9,14 +9,14 @@ def test_speed():
     download_start = urllib.request.urlopen(url)
     urllib.request.urlretrieve(url, download_file)
     download_end = download_start.getcode()
-    download_speed = download_end / 1024 / 1024  # Velocidade em megabytes por segundo
+    download_speed = download_end / 1024 / 1024
 
     upload_command = f"dd if=/dev/zero of={upload_file} bs=1M count=1000"
     subprocess.run(upload_command, shell=True)
     upload_speed_output = subprocess.check_output(
         f"pv {upload_file} | curl -T - ftp://speedtest.tele2.net/upload/", shell=True
     )
-    upload_speed = float(upload_speed_output.decode("utf-8").split()[-2]) / 1024 / 1024  # Velocidade em megabytes por segundo
+    upload_speed = float(upload_speed_output.decode("utf-8").split()[-2]) / 1024 / 1024
 
     ping_command = "ping -c 4 speedtest.net | tail -1| awk '{print $4}' | cut -d '/' -f 2"
     ping_output = subprocess.check_output(ping_command, shell=True)
