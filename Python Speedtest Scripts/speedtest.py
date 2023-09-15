@@ -16,4 +16,5 @@ def run_speed_test():
     ping = s.results.ping 
     print("Ping:", round(ping, 2), "ms")
 
+
 run_speed_test()
